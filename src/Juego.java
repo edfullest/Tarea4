@@ -22,12 +22,15 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.net.URL;
 import java.util.LinkedList;
+import javax.swing.*;
+import javax.swing.event.*;
+
 
 /**
  *
  * @author AntonioM
  */
-public class Juego extends Applet implements Runnable, KeyListener{
+public class Juego extends JFrame implements Runnable, KeyListener{
 
     private final int iMAXANCHO = 10; // maximo numero de personajes por ancho
     private final int iMAXALTO = 8;  // maxuimo numero de personajes por alto
@@ -145,10 +148,10 @@ public class Juego extends Applet implements Runnable, KeyListener{
                 Toolkit.getDefaultToolkit().getImage(urlImagenGameOver));
                 
         
-        URL urlSonidoChimpy = this.getClass().getResource("monkey2.wav");
-        URL urlSonidoChimpy1 = this.getClass().getResource("monkey1.wav");
-        adcSonidoChimpy = getAudioClip (urlSonidoChimpy);
-        adcMonkey1 = getAudioClip (urlSonidoChimpy1);
+        URL urlSonidoChimpy = Juego.class.getClass().getResource("monkey2.wav");
+        URL urlSonidoChimpy1 = Juego.class.getClass().getResource("monkey1.wav");
+        adcSonidoChimpy = Applet.newAudioClip(urlSonidoChimpy);
+        adcMonkey1 = Applet.newAudioClip(urlSonidoChimpy1);
         adcSonidoChimpy.play();
         
         addKeyListener(this);
@@ -179,6 +182,7 @@ public class Juego extends Applet implements Runnable, KeyListener{
      * de nuestro juego.
      * 
      */
+    @Override
     public void run () {
         /* mientras dure el juego, se actualizan posiciones de jugadores
            se checa si hubo colisiones para desaparecer jugadores o corregir
@@ -466,6 +470,7 @@ public class Juego extends Applet implements Runnable, KeyListener{
      * @param graGrafico es el <code>objeto grafico</code> usado para dibujar.
      * 
      */
+    @Override
     public void update (Graphics graGrafico){
         // Inicializan el DoubleBuffer
         if (imaImagenApplet == null){
@@ -502,6 +507,7 @@ public class Juego extends Applet implements Runnable, KeyListener{
      * @param graDibujo es el objeto de <code>Graphics</code> usado para dibujar.
      * 
      */
+    @Override
     public void paint(Graphics graDibujo) {
         // si la imagen ya se cargo
         if (basPrincipal != null && lklFantasmitas != null && lklMalos != null) {
@@ -596,4 +602,25 @@ public class Juego extends Applet implements Runnable, KeyListener{
     public void keyReleased(KeyEvent e) {
         
     }
+    public class panel extends JPanel
+    {
+        public panel()
+        {
+            //this is where the diplay items go
+        }
+    }
+    public Juego(){
+        init();
+        setSize(800,500);
+        setVisible(true);
+    
+    }
+
+    public  static void main(String[] args)
+    {
+        new Juego();
+        
+    }
+
+
 }
