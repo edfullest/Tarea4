@@ -8,8 +8,6 @@
  * @version 99 
  * @date 99/XXX/99
  */
-//tu jefaaaaaaa
-//Comentario Eduardo
  
 import java.awt.Graphics;
 import java.awt.Image;
